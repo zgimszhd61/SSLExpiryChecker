@@ -1,7 +1,9 @@
 # SSLExpiryChecker
-抱歉给你带来了混淆，Python 的 `ssl` 模块确实没有 `der_cert_to_pem_cert` 方法。这是我在示例代码中的错误。我们可以使用其他方式来从SSL连接中获取并转换证书数据。
+```
+pip install pyOpenSSL
+```
 
-下面是一种修正方法，直接使用 `OpenSSL.crypto` 模块来处理从服务器获取的DER格式证书，并转换为PEM格式，然后再解析它：
+直接使用 `OpenSSL.crypto` 模块来处理从服务器获取的DER格式证书，并转换为PEM格式，然后再解析它(将下面代码命名为app.py)：
 
 ```python
 import ssl
@@ -30,4 +32,11 @@ print('SSL Certificate Expiry Date:', expiry_date)
 2. **转换证书**：使用`OpenSSL.crypto`的`load_certificate`方法将DER格式证书转换为`X509`对象。
 3. **解析日期**：提取证书的到期时间并将其转换为Python的`datetime`对象。
 
-现在你可以再次尝试运行这段代码。它应该能够成功连接到指定的服务器（例如`taobao.com`），获取SSL证书信息，并打印出证书的到期日期。
+你可以尝试运行这段代码。它应该能够成功连接到指定的服务器（例如`taobao.com`），获取SSL证书信息，并打印出证书的到期日期。
+
+```
+python3 app.py
+```
+![内容](https://pbs.twimg.com/media/GLxwniLaAAAVpBg?format=png&name=900x900 "Optional title")
+
+
